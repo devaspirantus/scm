@@ -1,0 +1,73 @@
+@extends('admin.layouts.master')
+
+@section('title')
+    الكورسات
+@endsection
+
+@section('content')
+    <div class="col-12" style="background-color: white; padding:15px;">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title" style="text-align: center; float: none;">بيانات الكورسات</h3>
+                <div class="card-tools">
+                    <a href="{{ route('courses.create') }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i> إضافة كورس جديد
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body table-responsive p-0" style="height: 400px;">
+                <table class="table table-bordered table-hover" id="example2">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم الكورس</th>
+                            <th>الرابط</th>
+                            <th>الحالة</th>
+                            <th>تاريخ الإضافة</th>
+                            <th>التحكم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($data as $info)
+                            <tr>
+                                <td>{{ $info->id }}</td>
+                                <td>{{ $info->name }}</td>
+                                <td>
+                                    @if($info->link)
+                                        <a href="{{ $info->link }}" target="_blank" class="btn btn-info btn-sm">
+                                            <i class="fas fa-external-link-alt"></i> فتح
+                                        </a>
+                                    @else
+                                        <span class="text-muted">لا يوجد</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($info->active == 1)
+                                        <span class="badge badge-success">مفعل</span>
+                                    @else
+                                        <span class="badge badge-danger">معطل</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $info->created_at->format('Y-m-d') }}
+                                </td>
+                                <th>
+                                    <a href="#" class="button" style="background-color: green;color:white; padding:10px;">تعديل</a>
+                                    <a href="#" class="button" style="background-color: red;color:white; padding:10px;">حذف</a>
+                                </th>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted" style="padding: 20px;">
+                                    <i class="fas fa-inbox fa-2x mb-2"></i>
+                                    <p>لا توجد بيانات لعرضها</p>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+@endsection
