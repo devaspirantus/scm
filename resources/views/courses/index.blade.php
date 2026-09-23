@@ -31,6 +31,21 @@
             @endif
 
 
+
+            {{-- ✅ رسالة التحذير --}}
+            @if(Session::has('error'))
+                <div class="alert alert-warning alert-dismissible fade show position-fixed auto-hide-alert" 
+                     id="warningAlert"
+                     style="top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+                     role="alert">
+                    <i class="fas fa-exclamation-triangle ml-2"></i>
+                    <strong>تحذير!</strong> {{ Session::get('error') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             {{-- ✅ رسالة التحذير --}}
             @if(Session::has('warning'))
                 <div class="alert alert-warning alert-dismissible fade show position-fixed auto-hide-alert" 
@@ -99,8 +114,8 @@
                                     {{ $info->created_at->format('Y-m-d') }}
                                 </td>
                                 <th>
-                                    <a href="#" class="button" style="background-color: green;color:white; padding:10px;">تعديل</a>
-                                    <a href="#" class="button" style="background-color: red;color:white; padding:10px;">حذف</a>
+                                    <a href="{{ route('courses.edit',$info->id) }}" class="button" style="background-color: green;color:white; padding:10px;">تعديل</a>
+                                    <a href="{{ route('courses.destroy',$info->id) }}" class="button" style="background-color: red;color:white; padding:10px;">حذف</a>
                                 </th>
                             </tr>
                         @empty
