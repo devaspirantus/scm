@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    إضافة كورس
+    تعديل كورس
 @endsection
 
 @section('content')
@@ -38,13 +38,13 @@
             </script>
     <div class="card">
         <div class="card-header" >
-            <h3 class="card-title">إضافة كورس جديد</h3>
+            <h3 class="card-title">تعديل كورس جديد</h3>
         </div>
         
         <!-- ✅ إضافة enctype للرفع -->
-        <form role="form" method="POST" action="{{ route('courses.store') }}" enctype="multipart/form-data">
+        <form role="form" method="POST" action="{{ route('courses.update',$data->id) }}" enctype="multipart/form-data">
             @csrf
-            
+           @method('PUT')
             <div class="card-body">
                 <!-- حقل اسم الكورس -->
                 <div class="form-group">
@@ -55,7 +55,7 @@
                         class="form-control @error('name') is-invalid @enderror" 
                         id="name" 
                         placeholder="ادخل اسم الكورس" 
-                        value="{{ old('name') }}"
+                        value="{{ old('name',$data['name']) }}"
                         autofocus
                     >
                     @error('name')
@@ -74,7 +74,7 @@
                         class="form-control @error('link') is-invalid @enderror" 
                         id="link" 
                         placeholder="ادخل رابط الكورس (https://...)" 
-                        value="{{ old('link') }}"
+                        value="{{ old('link',$data['link']) }}"
                     >
                     @error('link')
                         <span class="invalid-feedback" style="display: block;">
@@ -92,8 +92,8 @@
                         class="form-control @error('active') is-invalid @enderror"
                     >
                         <option value="">اختر الحالة</option>
-                        <option value="1" {{ old('active') == '1' ? 'selected' : '' }}>مفعل</option>
-                        <option value="0" {{ old('active') === '0' ? 'selected' : '' }}>غير مفعل</option>
+                        <option value="1" {{ old('active',$data['active']) == '1' ? 'selected' : '' }}>مفعل</option>
+                        <option value="0" {{ old('active',$data['active']) == '0' ? 'selected' : '' }}>غير مفعل</option>
                     </select>
                     @error('active')
                         <span class="invalid-feedback" style="display: block;">
@@ -134,7 +134,7 @@
             <div class="card-footer" style="text-align: center;">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save ml-1"></i>
-                    إضافة الكورس
+                    تحديث الكورس
                 </button>
                 <a href="{{ route('courses.index') }}" class="btn btn-secondary">
                     <i class="fas fa-times ml-1"></i>

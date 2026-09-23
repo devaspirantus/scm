@@ -26,12 +26,266 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/custom.css') }}">
-</head>
+<style>
+/* ========================================
+   DGA Saudi Arabia Design System
+   IBM Plex Sans Arabic - Smart Implementation
+   ======================================== */
+
+/* ✅ تطبيق الخط على العناصر الأساسية فقط */
+body,
+html,
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+p, span, div,
+.content-wrapper,
+.content-header,
+.card,
+.card-body,
+.card-title,
+.card-text,
+table,
+th, td,
+label,
+input,
+textarea,
+select,
+button {
+    font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+}
+
+/* ✅ استثناء عناصر AdminLTE المهمة */
+.main-sidebar,
+.sidebar,
+.nav-sidebar,
+.nav-link,
+.nav-item,
+.brand-link,
+.brand-text,
+.user-panel,
+.control-sidebar,
+.navbar,
+.main-header,
+.main-footer {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* ✅ استثناء Font Awesome */
+.fa, .fas, .far, .fal, .fad, .fab,
+.fa::before, .fas::before, .far::before, .fal::before, .fad::before, .fab::before,
+i[class^="fa-"],
+i[class*=" fa-"] {
+    font-family: "Font Awesome 5 Free" !important;
+}
+
+.fab, .fab::before {
+    font-family: "Font Awesome 5 Brands" !important;
+}
+
+/* ========================================
+   Typography حسب DGA Guidelines
+   ======================================== */
+
+body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #1B2021;
+}
+
+/* العناوين */
+h1, .h1 {
+    font-size: 2.5rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3;
+    color: #1B2021;
+    margin-bottom: 1rem;
+}
+
+h2, .h2 {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    line-height: 1.3;
+    color: #1B2021;
+    margin-bottom: 0.875rem;
+}
+
+h3, .h3 {
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4;
+    color: #1B2021;
+    margin-bottom: 0.75rem;
+}
+
+h4, .h4 {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    line-height: 1.4;
+    color: #1B2021;
+    margin-bottom: 0.625rem;
+}
+
+h5, .h5 {
+    font-size: 1.125rem !important;
+    font-weight: 500 !important;
+    line-height: 1.5;
+    color: #1B2021;
+}
+
+h6, .h6 {
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    line-height: 1.5;
+    color: #1B2021;
+}
+
+/* النصوص */
+p {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.75;
+    color: #3D4243;
+    margin-bottom: 1rem;
+}
+
+/* البطاقات */
+.card-title {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: #1B2021;
+}
+
+.card-text {
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: #3D4243;
+}
+
+/* الجداول */
+table thead th {
+    font-size: 0.9375rem !important;
+    font-weight: 600 !important;
+    color: #1B2021;
+}
+
+table tbody td {
+    font-size: 0.9375rem !important;
+    font-weight: 400 !important;
+    color: #3D4243;
+}
+
+/* الأزرار */
+.btn {
+    font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+    font-size: 0.9375rem !important;
+    font-weight: 500 !important;
+}
+
+.btn-lg {
+    font-size: 1.125rem !important;
+}
+
+.btn-sm {
+    font-size: 0.875rem !important;
+}
+
+/* حقول الإدخال */
+.form-control,
+.custom-select {
+    font-family: 'IBM Plex Sans Arabic', sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+}
+
+.form-control::placeholder {
+    color: #8A9192;
+    font-weight: 300;
+}
+
+/* التسميات */
+label {
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: #1B2021;
+    margin-bottom: 0.5rem;
+}
+
+/* Small text */
+small, .text-sm {
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+}
+
+/* ========================================
+   ألوان DGA الرسمية
+   ======================================== */
+.text-dga-primary { color: #4C6EF5 !important; }
+.text-dga-secondary { color: #1B2021 !important; }
+.text-dga-muted { color: #8A9192 !important; }
+
+/* ========================================
+   تحسينات RTL
+   ======================================== */
+[dir="rtl"] {
+    text-align: right;
+}
+
+[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: 0.5rem;
+    padding-right: 0;
+}
+
+[dir="rtl"] .dropdown-menu {
+    text-align: right;
+}
+
+/* ========================================
+   Sidebar - الحفاظ على التصميم الأصلي
+   ======================================== */
+.main-sidebar {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.nav-sidebar .nav-link {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+.nav-sidebar .nav-link p {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+.brand-link .brand-text {
+    font-size: 18px !important;
+    font-weight: 300 !important;
+}
+
+/* ========================================
+   إمكانية الوصول (Accessibility)
+   ======================================== */
+*:focus {
+    outline: 2px solid #4C6EF5;
+    outline-offset: 2px;
+}
+
+/* منع تحجيم النص في iOS */
+input, textarea, select {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+</style>
+  </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -224,21 +478,21 @@
                         <li class="nav-item">
                             <a href="{{ route('courses.index') }}" class="nav-link">
 
-                                <p>
+                                <p style="color: white;">
                                     ضبط الكورسات
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <p>
+                                <p style="color: white;">
                                     بيانات الطلاب
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <p>
+                                <p style="color: white;">
                                     بيانات حجوزات الكورسات
                                 </p>
                             </a>
