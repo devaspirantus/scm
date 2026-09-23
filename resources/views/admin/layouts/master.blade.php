@@ -478,21 +478,21 @@ input, textarea, select {
                         <li class="nav-item">
                             <a href="{{ route('courses.index') }}" class="nav-link">
 
-                                <p>
+                                <p style="color: white;">
                                     ضبط الكورسات
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <p>
+                                <p style="color: white;">
                                     بيانات الطلاب
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <p>
+                                <p style="color: white;">
                                     بيانات حجوزات الكورسات
                                 </p>
                             </a>
