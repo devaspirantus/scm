@@ -114,8 +114,19 @@
                                     {{ $info->created_at->format('Y-m-d') }}
                                 </td>
                                 <th>
-                                    <a href="{{ route('courses.edit',$info->id) }}" class="button" style="background-color: green;color:white; padding:10px;">تعديل</a>
-                                    <a href="{{ route('courses.destroy',$info->id) }}" class="button" style="background-color: red;color:white; padding:10px;">حذف</a>
+                                    <a href="{{ route('courses.edit',$info->id) }}" class="btn btn-warning btn-sm">تعديل</a>
+                                   {{-- ✅ الفورم الصحيح للحذف --}}
+<form action="{{ route('courses.destroy', $info->id) }}" 
+      method="POST" 
+      style="display: inline;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" 
+            class="btn btn-danger btn-sm"
+            onclick="return confirm('⚠️ هل أنت متأكد من حذف الكورس:\n\n«{{ $info->name }}»؟\n\nهذا الإجراء لا يمكن التراجع عنه!')">
+        <i class="fas fa-trash-alt"></i> حذف
+    </button>
+</form>
                                 </th>
                             </tr>
                         @empty
