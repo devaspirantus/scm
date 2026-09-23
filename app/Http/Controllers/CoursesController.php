@@ -10,8 +10,8 @@ class CoursesController extends Controller
 {
     public function index()
     {
-        $data = Course::all();
-        return view('courses.index',compact('data'));
+        $course = Course::all();
+        return view('courses.index',compact('course'));
     }
 
     public function create()
@@ -51,23 +51,36 @@ class CoursesController extends Controller
 
     public function update($id,CreateCourseValidationRequest $request)
     {
-        $CourseData = Course::findOrFail($id);
+        $course = Course::findOrFail($id);
 
-        if(empty($CourseData)){
+        if(empty($course)){
             return redirect()->route('courses.index')->with(['error' => 'غير قادر على الوصول']);
         }
-        $CourseData['name'] = $request->name;
-        $CourseData['link'] = $request->link;
-        $CourseData['active'] = $request->active ?? 1;
+        $course['name'] = $request->name;
+        $course['link'] = $request->link;
+        $course['active'] = $request->active ?? 1;
 
-        $CourseData->save();
+        $course->save();
 
         return redirect()->route('courses.index')->with(['success' => 'تم التحديث']);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        
+        $course = Course::findOrFail($id);
+
+        if(empty($course))
+            {
+                return redirect()->route('courses.index')->with(['error' => 'غير قادر على الوصول']);
+            }
+            $course->delete();
+            return redirect()->route('courses.index')->with(['success' => 'تم الحذف']);
+    }
+
+    public function show($id)
+    {
+    $course = Course::findOrFail($id);
+        return view('courses.index',compact('course'));
     }
 
 }

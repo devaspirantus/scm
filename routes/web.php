@@ -18,7 +18,7 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 // Route::get('edit/{id}',[CoursesController::class,'edit'])->name('courses.edit');
 // Route::post('update/{id}',[CoursesController::class,'update'])->name('courses.update');
 // Route::get('destroy/{id}',[CoursesController::class,'destroy'])->name('courses.destroy');
-Route::resource('courses',CoursesController::class);
+Route::resource('courses',CoursesController::class)->except(['show']);
 
 Route::resource('flights',ResFlightController::class);
 Route::resource('countries',CountriesController::class);

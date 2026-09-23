@@ -90,7 +90,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($data as $info)
+                        @forelse($course as $info)
                             <tr>
                                 <td>{{ $info->id }}</td>
                                 <td>{{ $info->name }}</td>
