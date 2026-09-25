@@ -64,6 +64,24 @@
                         </span>
                     @enderror
                 </div>
+                         <!-- حقل اسم الدولة -->
+                <div class="form-group">
+                    <label for="country_id">اسم الدولة <span style="color: red;">*</span></label>
+                    <input 
+                        type="text" 
+                        name="country_id" 
+                        class="form-control @error('country_id') is-invalid @enderror" 
+                        id="name" 
+                        placeholder="ادخل اسم الدولة" 
+                        value="{{ old('countries') }}"
+                        autofocus
+                    >
+                    @error('country_id')
+                        <span class="invalid-feedback" style="display: block;">
+                            <strong style="color: red;">{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
 
                 <!-- حقل رفع الملف -->

@@ -66,6 +66,7 @@
                             <th>الدولة</th>
                             <th>العنوان</th>
                             <th>معلومات التواصل</th>
+                            <th>صورة الطالب</th>
                             <th>ملاحظات</th>
                             <th>التفعيل</th>
                             <th>تاريخ الإضافة</th>
@@ -84,6 +85,7 @@
                                 {{-- ✅ إضافة ?? للحماية من القيم الفارغة (Null) --}}
                                 <td>{{ $info->address ?? 'غير متوفر' }}</td>
                                 <td>{{ $info->phone ?? 'غير متوفر' }}</td>
+                                <td><img src="{{ asset('uploads/'.$info->image) }}" alt="avatar logo" style="height:40px;width:40px;"></td>
                                 <td>{{ $info->notes ?? '-' }}</td>
                                 
                                 <td>

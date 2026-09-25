@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,8 @@ class StudentController extends Controller
 
     public function create()
     {
-
+        $countries = countries::select("id","name")->where('active',1)->get();
+        return view('students.create',['countries' => $countries]);
     }
 
     public function store()
