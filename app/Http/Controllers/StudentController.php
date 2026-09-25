@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Http\Requests\StudentRequest;
 
 class StudentController extends Controller
 {
@@ -22,13 +23,30 @@ class StudentController extends Controller
 
     public function create()
     {
-        $countries = countries::select("id","name")->where('active',1)->get();
+        $countries = Country::select("id","name")->where('active',1)->get();
         return view('students.create',['countries' => $countries]);
     }
 
-    public function store()
+    public function store(StudentRequest $request)
     {
+                // validate if the course has been registered before 
+        $exists = Student::where('name','=',$request->name)->exists();
 
+        if($exists>0){
+            return redirect()->back()->with(['error' => 'الطالب مسجل مسبقا']);
+        }
+        $student = new Student();
+
+        $student->name = $request->name;
+        $student->country_id = $request->country_id;
+        $student->phone = $request->phone;
+        $student->address = $request->address;
+        $student->notes = $request->notes;
+        $student->active = $request->active;
+
+        $student->save();
+
+        return redirect()->route('students.index')->with(['success' => 'تم اضافة الطالب بنجاح'])->withInput();
     }
 
     public function edit()

@@ -18,11 +18,11 @@
             </div>
 
             {{-- ✅ رسائل التنبيه --}}
-            @if(Session::has('success'))
-                <div class="alert alert-success alert-dismissible fade show position-fixed auto-hide-alert" 
-                     id="successAlert"
-                     style="top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
-                     role="alert">
+            @if (Session::has('success'))
+                <div class="alert alert-success alert-dismissible fade show position-fixed auto-hide-alert"
+                    id="successAlert"
+                    style="top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+                    role="alert">
                     <i class="fas fa-check-circle ml-2"></i>
                     <strong>نجح!</strong> {{ Session::get('success') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -31,11 +31,10 @@
                 </div>
             @endif
 
-            @if(Session::has('error'))
-                <div class="alert alert-danger alert-dismissible fade show position-fixed auto-hide-alert" 
-                     id="errorAlert"
-                     style="top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
-                     role="alert">
+            @if (Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show position-fixed auto-hide-alert" id="errorAlert"
+                    style="top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+                    role="alert">
                     <i class="fas fa-times-circle ml-2"></i>
                     <strong>خطأ!</strong> {{ Session::get('error') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -52,7 +51,9 @@
                         alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                         alert.style.opacity = '0';
                         alert.style.transform = 'translateX(-50%) translateY(-20px)';
-                        setTimeout(function() { alert.remove(); }, 500);
+                        setTimeout(function() {
+                            alert.remove();
+                        }, 500);
                     });
                 }, 4000);
             </script>
@@ -64,6 +65,7 @@
                             <th>#</th>
                             <th>اسم الطالب</th>
                             <th>الدولة</th>
+                            <th>رقم الهوية</th>
                             <th>العنوان</th>
                             <th>معلومات التواصل</th>
                             <th>صورة الطالب</th>
@@ -78,18 +80,27 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $info->name }}</td>
-                                
+
                                 {{-- ✅ التصحيح الجوهري: استدعاء العلاقة country ثم الخاصية name --}}
                                 <td>{{ $info->country->name ?? 'غير محدد' }}</td>
-                                
+                                <td>{{ $info->nationalID ?? 'غير متوفر' }}</td>
                                 {{-- ✅ إضافة ?? للحماية من القيم الفارغة (Null) --}}
                                 <td>{{ $info->address ?? 'غير متوفر' }}</td>
                                 <td>{{ $info->phone ?? 'غير متوفر' }}</td>
-                                <td><img src="{{ asset('uploads/'.$info->image) }}" alt="avatar logo" style="height:40px;width:40px;"></td>
+                                <td>@php
+                                    $imagePath = $info->image ? 'uploads/' . $info->image : 'uploads/avatar.png';
+                                    $fullPath = public_path($imagePath);
+                                    $finalImage = file_exists($fullPath)
+                                        ? asset($imagePath)
+                                        : asset('uploads/avatar.png');
+                                @endphp
+                                    <img src="{{ $finalImage }}" class="rounded-circle" alt="logo"
+                                        style="height:40px;width:40px;">
+                                </td>
                                 <td>{{ $info->notes ?? '-' }}</td>
-                                
+
                                 <td>
-                                    @if($info->active == 1)
+                                    @if ($info->active == 1)
                                         <span class="badge badge-success">مفعل</span>
                                     @else
                                         <span class="badge badge-danger">معطل</span>
@@ -101,18 +112,18 @@
                                 <td>
                                     <div class="btn-group" role="group">
                                         {{-- ✅ تم تصحيح المسار إلى students.edit --}}
-                                        <a href="{{ route('students.edit', $info->id) }}" class="btn btn-sm btn-warning" title="تعديل">
+                                        <a href="{{ route('students.edit', $info->id) }}" class="btn btn-sm btn-warning"
+                                            title="تعديل">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        
+
                                         {{-- ✅ تم تصحيح المسار والنص إلى students.destroy وحذف الطالب --}}
-                                        <form action="{{ route('students.destroy', $info->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('students.destroy', $info->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" 
-                                                    class="btn btn-sm btn-danger" 
-                                                    title="حذف"
-                                                    onclick="return confirm('⚠️ هل أنت متأكد من حذف الطالب:\n\n«{{ $info->name }}»؟\n\nهذا الإجراء لا يمكن التراجع عنه!')">
+                                            <button type="submit" class="btn btn-sm btn-danger" title="حذف"
+                                                onclick="return confirm('⚠️ هل أنت متأكد من حذف الطالب:\n\n«{{ $info->name }}»؟\n\nهذا الإجراء لا يمكن التراجع عنه!')">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
