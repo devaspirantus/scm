@@ -20,7 +20,7 @@
                     {{-- حقل اسم الطالب --}}
                     <div class="form-group">
                         <label for="name">اسم الطالب <span class="text-danger">*</span></label>
-                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" 
+                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror"
                                value="{{ old('name') }}" placeholder="أدخل اسم الطالب" required>
                         @error('name')
                             <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
@@ -46,7 +46,7 @@
                            {{-- حقل العنوان --}}
                     <div class="form-group">
                         <label for="nationalID">رقم الهوبة</label>
-                        <input type="text" name="nationalID" id="nationalID" class="form-control @error('nationalID') is-invalid @enderror" 
+                        <input type="text" name="nationalID" id="nationalID" class="form-control @error('nationalID') is-invalid @enderror"
                                value="{{ old('nationalID') }}" placeholder="أدخل هوية الطالب">
                         @error('nationalID')
                             <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
@@ -56,7 +56,7 @@
                     {{-- حقل العنوان --}}
                     <div class="form-group">
                         <label for="address">العنوان</label>
-                        <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror" 
+                        <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror"
                                value="{{ old('address') }}" placeholder="أدخل عنوان الطالب">
                         @error('address')
                             <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
@@ -66,7 +66,7 @@
                     {{-- حقل معلومات التواصل --}}
                     <div class="form-group">
                         <label for="phone">معلومات التواصل (هاتف/بريد)</label>
-                        <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" 
+                        <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
                                value="{{ old('phone') }}" placeholder="أدخل رقم الهاتف ">
                         @error('phones')
                             <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
@@ -74,18 +74,17 @@
                     </div>
 
                       <!-- حقل رفع الملف -->
-                {{-- <div class="form-group">
-                    <label for="image">صورة الكورس</label>
+                     <label for="photo">صورة الكورس</label>
                     <div class="input-group">
                         <div class="custom-file">
-                            <input 
-                                type="file" 
-                                name="image" 
-                                class="custom-file-input @error('image') is-invalid @enderror" 
-                                id="image"
+                            <input
+                                type="file"
+                                name="photo"
+                                class="custom-file-input @error('photo') is-invalid @enderror"
+                                id="photo"
                                 accept="image/*"
                             >
-                            <label class="custom-file-label" for="image">اختر ملف</label>
+                            <label class="custom-file-label" for="photo">اختر ملف</label>
                         </div>
                         <div class="input-group-append">
                             <span class="input-group-text">رفع</span>
@@ -99,12 +98,12 @@
                     <small class="form-text text-muted">
                         الصيغ المسموحة: JPG, PNG, GIF (الحد الأقصى: 2MB)
                     </small>
-                </div> --}}
+                </div>
 
                     {{-- حقل الملاحظات --}}
                     <div class="form-group">
                         <label for="notes">ملاحظات</label>
-                        <textarea name="notes" id="notes" class="form-control @error('notes') is-invalid @enderror" 
+                        <textarea name="notes" id="notes" class="form-control @error('notes') is-invalid @enderror"
                                   rows="3" placeholder="أي ملاحظات إضافية...">{{ old('notes') }}</textarea>
                         @error('notes')
                             <span class="invalid-feedback" style="display: block;">{{ $message }}</span>

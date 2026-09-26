@@ -40,10 +40,19 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->country_id = $request->country_id;
         $student->phone = $request->phone;
+        $student->nationalID = $request->nationalID;
         $student->address = $request->address;
         $student->notes = $request->notes;
         $student->active = $request->active;
 
+        if($request->has('photo'))
+            {
+                $image = $request->photo;
+                $extension = strtolower($image->extension());
+                $filename = time().rand(1,1000).".".$extension;
+                $image->move('uploads',$filename);
+                $student->image = $filename;
+            }
         $student->save();
 
         return redirect()->route('students.index')->with(['success' => 'تم اضافة الطالب بنجاح'])->withInput();
