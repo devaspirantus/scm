@@ -13,7 +13,7 @@ class TrainingController extends Controller
         $training_data = Training::all();
         if(!empty($training_data)){
             foreach ($training_data as $info){
-                $info->country_name = Country::where('id','=',$info->country_id)->value('name');
+                $info->course_name = Country::where('id','=',$info->course)->value('name');
             }
         }
         return view('trainings.index',['training_data' => $training_data]);
@@ -21,7 +21,7 @@ class TrainingController extends Controller
 
     public function create()
     {
-
+        return view('trainings.create');
     }
 
     public function store()

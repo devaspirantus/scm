@@ -75,34 +75,16 @@
                     <tbody>
                         @forelse($training_data as $info)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $info->name }}</td>
+                                <td>{{ $info->id }}</td>
+                                <td>{{ $info->course->name }}</td>
 
                                 {{-- ✅ التصحيح الجوهري: استدعاء العلاقة country ثم الخاصية name --}}
-                                <td>{{ $info->country->name ?? 'غير محدد' }}</td>
-                                <td>{{ $info->nationalID ?? 'غير متوفر' }}</td>
+                                <td>{{ $info->price ?? 'غير متوفر' }}</td>
                                 {{-- ✅ إضافة ?? للحماية من القيم الفارغة (Null) --}}
-                                <td>{{ $info->address ?? 'غير متوفر' }}</td>
-                                <td>{{ $info->phone ?? 'غير متوفر' }}</td>
-                                <td>@php
-                                    $imagePath = $info->image ? 'uploads/' . $info->image : 'uploads/avatar.png';
-                                    $fullPath = public_path($imagePath);
-                                    $finalImage = file_exists($fullPath)
-                                        ? asset($imagePath)
-                                        : asset('uploads/avatar.png');
-                                @endphp
-                                    <img src="{{ $finalImage }}" class="rounded-circle" alt="logo"
-                                        style="height:40px;width:40px;">
-                                </td>
+                                <td>{{ $info->start_date ?? 'غير متوفر' }}</td>
+                                <td>{{ $info->end_date ?? 'غير متوفر' }}</td>
+                        
                                 <td>{{ $info->notes ?? '-' }}</td>
-
-                                <td>
-                                    @if ($info->active == 1)
-                                        <span class="badge badge-success">مفعل</span>
-                                    @else
-                                        <span class="badge badge-danger">معطل</span>
-                                    @endif
-                                </td>
                                 <td>
                                     {{ optional($info->created_at)->format('Y-m-d') ?? '-' }}
                                 </td>
