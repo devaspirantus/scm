@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TrainingRequest;
 use App\Models\Country;
+use App\Models\Course;
 use App\Models\Training;
 use Illuminate\Http\Request;
 
@@ -21,12 +23,22 @@ class TrainingController extends Controller
 
     public function create()
     {
-        return view('trainings.create');
+        $courses = Course::select('id','name')->where('active',1)->get();
+
+        return view('trainings.create',['courses' => $courses]);
     }
 
-    public function store()
+    public function store(TrainingRequest $request)
     {
+        $student = new Training();
+        $student->courseID = $request->courseID;
+        $student->start_date = $request->start_date;
+        $student->end_date = $request->end_date;
+        $student->price = $request->price;
+        $student->notes = $request->notes;
+        $student->save();
 
+        return redirect()->route('trainings.index')->with(['success' => 'تم اضافة البيانات']);
     }
 
     public function edit()

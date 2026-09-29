@@ -38,27 +38,28 @@
             </script>
     <div class="card">
         <div class="card-header" >
-            <h3 class="card-title">إضافة كورس جديد</h3>
+            <h3 class="card-title">إضافة دورة جديد</h3>
         </div>
         
         <!-- ✅ إضافة enctype للرفع -->
-        <form role="form" method="POST" action="{{ route('courses.store') }}" enctype="multipart/form-data">
+        <form role="form" method="POST" action="{{ route('trainings.store') }}" enctype="multipart/form-data">
             @csrf
             
             <div class="card-body">
                 <!-- حقل اسم الكورس -->
                 <div class="form-group">
-                    <label for="name">اسم الكورس <span style="color: red;">*</span></label>
-                    <input 
-                        type="text" 
-                        name="name" 
-                        class="form-control @error('name') is-invalid @enderror" 
-                        id="name" 
-                        placeholder="ادخل اسم الكورس" 
-                        value="{{ old('name') }}"
-                        autofocus
-                    >
-                    @error('name')
+                    <label for="courseID">الكورس المخصص للدورة<span style="color: red;">*</span></label>
+                    <select name="courseID" id="courseID" class="form-control">
+                        <option value="">اختر كورس</option>
+                        @if (!@empty($courses))
+                            @foreach ($courses as $info)
+                                <option value="{{ $info->id }}" @if (old('courseID' == $info->id))
+                                    selected
+                                @endif>{{$info->name}}</option>
+                            @endforeach                            
+                        @endif
+                    </select>
+                    @error('courseID')
                         <span class="invalid-feedback" style="display: block;">
                             <strong style="color: red;">{{ $message }}</strong>
                         </span>
@@ -67,16 +68,17 @@
 
                 <!-- حقل الرابط -->
                 <div class="form-group">
-                    <label for="link">الرابط</label>
+                    <label for="price">سعر الدورة</label>
                     <input 
-                        type="url" 
-                        name="link" 
-                        class="form-control @error('link') is-invalid @enderror" 
-                        id="link" 
-                        placeholder="ادخل رابط الكورس (https://...)" 
-                        value="{{ old('link') }}"
+                        type="number" 
+                        name="price" 
+                        class="form-control @error('price') is-invalid @enderror" 
+                        id="price" 
+                        oninput="this.value=this.value.replace(/[^0-9.]/g,'');"
+                        placeholder="100 ريال" 
+                        value="{{ old('price') }}"
                     >
-                    @error('link')
+                    @error('price')
                         <span class="invalid-feedback" style="display: block;">
                             <strong style="color: red;">{{ $message }}</strong>
                         </span>
@@ -85,56 +87,42 @@
 
                 <!-- حقل الحالة -->
                 <div class="form-group">
-                    <label for="active">الحالة <span style="color: red;">*</span></label>
-                    <select 
-                        name="active" 
-                        id="active" 
-                        class="form-control @error('active') is-invalid @enderror"
-                    >
-                        <option value="">اختر الحالة</option>
-                        <option value="1" {{ old('active') == '1' ? 'selected' : '' }}>مفعل</option>
-                        <option value="0" {{ old('active') === '0' ? 'selected' : '' }}>غير مفعل</option>
-                    </select>
-                    @error('active')
+                    <label for="start_date">تاريخ بداية الدورة <span style="color: red;">*</span></label>
+       <input type="date" name="start_date" id="start_date" class="form-control" value="{{ old('start_date') }}">
+                    @error('start_date')
+                        <span class="invalid-feedback" style="display: block;">
+                            <strong style="color: red;">{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                              <!-- حقل الحالة -->
+                <div class="form-group">
+                    <label for="end_date">تاريخ نهاية الدورة <span style="color: red;">*</span></label>
+       <input type="date" name="end_date" id="end_date" class="form-control" value="{{ old('end_date') }}">
+                    @error('end_date')
+                        <span class="invalid-feedback" style="display: block;">
+                            <strong style="color: red;">{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                                              <!-- حقل الحالة -->
+                <div class="form-group">
+                    <label for="notes">ملاحظات <span style="color: red;">*</span></label>
+       <input type="text" name="notes" id="notes" class="form-control" value="{{ old('notes') }}">
+                    @error('notes')
                         <span class="invalid-feedback" style="display: block;">
                             <strong style="color: red;">{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
 
-                <!-- حقل رفع الملف -->
-                {{-- <div class="form-group">
-                    <label for="image">صورة الكورس</label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input 
-                                type="file" 
-                                name="image" 
-                                class="custom-file-input @error('image') is-invalid @enderror" 
-                                id="image"
-                                accept="image/*"
-                            >
-                            <label class="custom-file-label" for="image">اختر ملف</label>
-                        </div>
-                        <div class="input-group-append">
-                            <span class="input-group-text">رفع</span>
-                        </div>
-                    </div>
-                    @error('image')
-                        <span class="invalid-feedback" style="display: block;">
-                            <strong style="color: red;">{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    <small class="form-text text-muted">
-                        الصيغ المسموحة: JPG, PNG, GIF (الحد الأقصى: 2MB)
-                    </small>
-                </div> --}}
+      
             </div>
 
             <div class="card-footer" style="text-align: center;">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save ml-1"></i>
-                    إضافة الكورس
+                    إضافة الدورة
                 </button>
                 <a href="{{ route('courses.index') }}" class="btn btn-secondary">
                     <i class="fas fa-times ml-1"></i>
