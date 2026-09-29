@@ -41,18 +41,48 @@ class TrainingController extends Controller
         return redirect()->route('trainings.index')->with(['success' => 'تم اضافة البيانات']);
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $data = Training::find($id);
 
+        if(empty($data))
+            {
+                return redirect()->route('trainings.index')->with(['error' => 'cant']);
+            }
+
+            $courses = Course::select('id','name')->where('active',1)->get();
+
+            return view('trainings.edit',['data' => $data,'courses' => $courses]);
     }
     
-    public function update($id)
+    public function update($id, TrainingRequest $request)
     {
+        $student = Training::find($id);
 
+        if(empty($training_data))
+            {
+                return redirect()->route('trainings.index')->with(['error' => 'failed']);
+            }
+                 $student->courseID = $request->courseID;
+        $student->start_date = $request->start_date;
+        $student->end_date = $request->end_date;
+        $student->price = $request->price;
+        $student->notes = $request->notes;
+        $student->save();
+         return redirect()->route('trainings.index')->with(['success' => 'OK']);
     }
 
     public function destroy($id)
     {
+              $student = Training::find($id);
+
+        if(empty($training_data))
+            {
+                return redirect()->route('trainings.index')->with(['error' => 'failed']);
+            }
+            $student->delete();
+         return redirect()->route('trainings.index')->with(['success' => 'OK']);
+
 
     }
 

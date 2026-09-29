@@ -69,10 +69,14 @@ class CoursesController extends Controller
     {
         $course = Course::findOrFail($id);
 
-        if(empty($course))
-            {
-                return redirect()->route('courses.index')->with(['error' => 'غير قادر على الوصول']);
-            }
+        // if(empty($course))
+        //     {
+        //         return redirect()->route('courses.index')->with(['error' => 'غير قادر على الوصول']);
+        //     }
+               // Check if any trainings are using this course
+       if ($course->trainings()->exists()) {
+           return back()->with('error', 'Cannot delete this course because it is currently assigned to one or more trainings.');
+       }
             $course->delete();
             return redirect()->route('courses.index')->with(['success' => 'تم الحذف']);
     }

@@ -11,4 +11,11 @@ class Course extends Model
     protected $fillable = ['name','link','active'];
 
     protected $casts = ['active' => 'boolean'];
-}
+
+
+   public function trainings()
+   {
+       return $this->hasMany(Training::class, 'courseID');
+   }
+
+    }
