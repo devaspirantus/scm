@@ -1,61 +1,365 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎓 نظام إدارة الكورسات والتدريب
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel](https://img.shields.io/badge/Laravel-13.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.5-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-4.x-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
+![AdminLTE](https://img.shields.io/badge/AdminLTE-3.0-00C0EF?style=for-the-badge&logo=adminlte&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## About the Project 
-This project is aim to understand the Laravel Life cycle and as student courses managment system  
+نظام متكامل لإدارة الكورسات والتدريبات مبني بـ Laravel مع واجهة تحكم احترافية باستخدام AdminLTE 3، متوافق مع معايير هيئة الحكومة الرقمية السعودية (DGA).
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 جدول المحتويات
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [عن المشروع](#-عن-المشروع)
+- [المميزات](#-المميزات)
+- [التقنيات المستخدمة](#-التقنيات-المستخدمة)
+- [المتطلبات](#-المتطلبات)
+- [التثبيت والإعداد](#️-التثبيت-والإعداد)
+- [التشغيل](#-التشغيل)
+- [هيكل المشروع](#-هيكل-المشروع)
+- [قاعدة البيانات](#-قاعدة-البيانات)
+- [المسارات المتاحة](#-المسارات-المستخدمة)
+- [لقطات الشاشة](#-لقطات-الشاشة)
+- [المساهمة](#-المساهمة)
+- [الترخيص](#-الترخيص)
+- [المطور](#-المطور)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🎯 عن المشروع
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+نظام إدارة الكورسات والتدريب هو تطبيق ويب متكامل يتيح إدارة شاملة لـ:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| الوحدة | الوصف |
+|--------|-------|
+| 📚 **الكورسات** | إدارة كاملة للكورسات (إضافة، تعديل، حذف، عرض) |
+| 🎯 **التدريبات** | ربط التدريبات بالكورسات مع الأسعار والمواعيد |
+| 🌍 **الدول والوجهات** | إدارة الدول والوجهات السياحية المرتبطة بها |
+| ✈️ **الرحلات** | نظام إدارة الرحلات الجوية |
+| 📊 **لوحة التحكم** | واجهة إدارية احترافية بإحصائيات شاملة |
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## ✨ المميزات
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### 🎨 واجهة المستخدم
+- ✅ تصميم عصري باستخدام **AdminLTE 3**
+- ✅ دعم كامل للغة العربية (**RTL**)
+- ✅ خطوط **IBM Plex Sans Arabic** المعتمدة من DGA
+- ✅ تصميم متجاوب (**Responsive**) لجميع الأجهزة
+- ✅ إشعارات **Toast** تفاعلية تختفي تلقائياً
+- ✅ أيقونات **Font Awesome 5** احترافية
+
+### 🔧 الوظائف الأساسية
+- ✅ عمليات **CRUD** كاملة لجميع البيانات
+- ✅ تحقق من صحة البيانات (**Form Requests**)
+- ✅ رسائل نجاح وخطأ تفاعلية مع إخفاء تلقائي
+- ✅ بحث وفلترة متقدمة
+- ✅ ترقيم تلقائي للصفحات (**Pagination**)
+- ✅ **Eager Loading** لتحسين الأداء
+
+### 🛡️ الأمان
+- ✅ حماية **CSRF** لجميع النماذج
+- ✅ حماية من حقن SQL عبر **Eloquent ORM**
+- ✅ تحقق من صحة المدخلات قبل الحفظ
+- ✅ منع تكرار البيانات الحساسة
+
+### 🔗 العلاقات في قاعدة البيانات
+- ✅ علاقة **واحد إلى كثير** (Country → Destinations)
+- ✅ علاقة **ينتمي إلى** (Training → Course)
+- ✅ استخدام **Foreign Keys** مع **Cascade Delete**
+
+---
+
+## 🚀 التقنيات المستخدمة
+
+| التقنية | الوصف | الإصدار |
+|---------|-------|---------|
+| **Laravel** | إطار عمل PHP | 13.x |
+| **PHP** | لغة البرمجة | 8.5 |
+| **MySQL** | قاعدة البيانات | 8.0 |
+| **AdminLTE** | قالب لوحة التحكم | 3.0 |
+| **Bootstrap** | إطار CSS | 4.x |
+| **jQuery** | مكتبة JavaScript | 3.x |
+| **Font Awesome** | الأيقونات | 5.x |
+| **Laravel Sail** | بيئة التطوير (Docker) | Latest |
+| **IBM Plex Sans Arabic** | الخطوط (معتمدة من DGA) | Latest |
+
+---
+
+## 📦 المتطلبات
+
+قبل البدء، تأكد من توفر المتطلبات التالية:
 
 ```bash
-composer require laravel/boost --dev
+# التحقق من الإصدارات
+php -v          # >= 8.2
+composer -V     # Latest
+docker -v       # Latest
+git --version   # Latest
+node -v         # >= 18.x
+npm -v          # >= 9.x
 
-php artisan boost:install
-```
+# إيقاف التشغيل
+./vendor/bin/sail down
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+# إعادة التشغيل
+./vendor/bin/sail restart
 
-## Contributing
+# عرض السجلات
+./vendor/bin/sail logs -f
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# الدخول إلى الحاوية
+./vendor/bin/sail shell
 
-## Code of Conduct
+# فتح phpMyAdmin
+# http://localhost:8080
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#Structure
+scm/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── CoursesController.php          # إدارة الكورسات
+│   │   │   ├── TrainingsController.php        # إدارة التدريبات
+│   │   │   ├── CountriesController.php        # إدارة الدول
+│   │   │   ├── DestinationsController.php     # إدارة الوجهات
+│   │   │   ├── FlightsController.php          # إدارة الرحلات
+│   │   │   └── HomeController.php             # الصفحة الرئيسية
+│   │   └── Requests/
+│   │       ├── CreateCourseValidationRequest.php
+│   │       └── CreateFlightRequest.php
+│   └── Models/
+│       ├── Course.php
+│       ├── Training.php
+│       ├── Country.php
+│       ├── Destination.php
+│       └── Flight.php
+│
+├── database/
+│   ├── migrations/
+│   │   ├── xxxx_create_courses_table.php
+│   │   ├── xxxx_create_trainings_table.php
+│   │   ├── xxxx_create_countries_table.php
+│   │   ├── xxxx_create_destinations_table.php
+│   │   └── xxxx_create_flights_table.php
+│   ├── factories/
+│   │   └── FlightFactory.php
+│   └── seeders/
+│       ├── DatabaseSeeder.php
+│       └── CreateFlightsSeeder.php
+│
+├── resources/
+│   └── views/
+│       ├── admin/
+│       │   └── layouts/
+│       │       └── master.blade.php           # القالب الرئيسي
+│       ├── courses/
+│       │   ├── index.blade.php
+│       │   ├── create.blade.php
+│       │   ├── edit.blade.php
+│       │   └── show.blade.php
+│       ├── trainings/
+│       ├── countries/
+│       ├── destinations/
+│       └── flights/
+│
+├── public/
+│   └── admin/
+│       ├── dist/
+│       │   ├── css/
+│       │   │   ├── adminlte.min.css
+│       │   │   └── custom.css                 # تنسيقات DGA المخصصة
+│       │   ├── js/
+│       │   └── img/
+│       └── plugins/
+│           ├── fontawesome-free/
+│           ├── jquery/
+│           ├── bootstrap/
+│           └── ...
+│
+├── routes/
+│   └── web.php
+│
+└── docker-compose.yml                         
 
-## Security Vulnerabilities
+#Relation
+┌─────────────────┐         ┌─────────────────┐
+│     courses     │         │    trainings    │
+├─────────────────┤         ├─────────────────┤
+│ id (PK)         │◄────────│ courseID (FK)   │
+│ name            │         │ price           │
+│ link            │         │ start_date      │
+│ active          │         │ end_date        │
+│ created_at      │         │ notes           │
+│ updated_at      │         │ created_at      │
+└─────────────────┘         └─────────────────┘
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+┌─────────────────┐         ┌─────────────────┐
+│    countries    │         │  destinations   │
+├─────────────────┤         ├─────────────────┤
+│ id (PK)         │◄────────│ country_id (FK) │
+│ name            │         │ destination     │
+│ active          │         │ created_at      │
+│ created_at      │         │ updated_at      │
+└─────────────────┘         └─────────────────┘
 
-## License
+┌─────────────────┐
+│     flights     │
+├─────────────────┤
+│ id (PK)         │
+│ name            │
+│ created_at      │
+│ updated_at      │
+└─────────────────┘
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#ORM
+// Training Model
+public function course()
+{
+    return $this->belongsTo(Course::class, 'courseID');
+}
+
+// Course Model
+public function trainings()
+{
+    return $this->hasMany(Training::class, 'courseID');
+}
+
+// Country Model
+public function destinations()
+{
+    return $this->hasMany(Destination::class);
+}
+
+// Destination Model
+public function country()
+{
+    return $this->belongsTo(Country::class);
+}
+
+#Routes
+Method
+	
+URL
+	
+الاسم
+	
+الوصف
+GET
+	
+/courses
+	
+courses.index
+	
+عرض قائمة الكورسات
+GET
+	
+/courses/create
+	
+courses.create
+	
+فورم إضافة كورس
+POST
+	
+/courses
+	
+courses.store
+	
+حفظ كورس جديد
+GET
+	
+/courses/{id}
+	
+courses.show
+	
+عرض تفاصيل كورس
+GET
+	
+/courses/{id}/edit
+	
+courses.edit
+	
+فورم تعديل كورس
+PUT
+	
+/courses/{id}
+	
+courses.update
+	
+حفظ التعديلات
+DELETE
+	
+/courses/{id}
+	
+courses.destroy
+	
+حذف كورس
+التدريبات:
+Method
+	
+URL
+	
+الاسم
+	
+الوصف
+GET
+	
+/trainings
+	
+trainings.index
+	
+عرض قائمة التدريبات
+GET
+	
+/trainings/create
+	
+trainings.create
+	
+فورم إضافة تدريب
+POST
+	
+/trainings
+	
+trainings.store
+	
+حفظ تدريب جديد
+PUT
+	
+/trainings/{id}
+	
+trainings.update
+	
+حفظ التعديلات
+DELETE
+	
+/trainings/{id}
+	
+trainings.destroy
+	
+حذف تدريب
+الدول والوجهات:
+Method
+	
+URL
+	
+الاسم
+	
+الوصف
+GET
+	
+/countries
+	
+countries.index
+	
+عرض قائمة الدول
+GET
+	
+/destinations
+	
+destinations.index
+	
+عرض قائمة الوجهات
