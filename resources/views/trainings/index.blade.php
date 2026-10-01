@@ -102,7 +102,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger" title="حذف"
-                                                onclick="return confirm('⚠️ هل أنت متأكد من حذف الطالب:\n\n«{{ $info->name }}»؟\n\nهذا الإجراء لا يمكن التراجع عنه!')">
+                                                onclick="return confirm('هل أنت متأكد من حذف هذه الدورة؟ هذا الإجراء لا يمكن التراجع عنه.')">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>

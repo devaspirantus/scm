@@ -363,3 +363,17 @@ GET
 destinations.index
 	
 عرض قائمة الوجهات
+
+#Merging locally via the Terminal
+
+# 1. Switch to the target branch you want to merge changes INTO
+git checkout main
+
+# 2. Pull the latest updates from GitHub to ensure you are up to date
+git pull origin main
+
+# 3. Merge your feature branch into the current branch
+git merge your-feature-branch
+
+# 4. Resolve conflicts if prompted, then push the merged changes back to GitHub
+git push origin main

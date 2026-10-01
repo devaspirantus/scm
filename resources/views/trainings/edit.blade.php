@@ -53,7 +53,7 @@
                         <option value="">اختر كورس</option>
                         @if (!@empty($courses))
                             @foreach ($courses as $info)
-                                <option value="{{ $info->id }}" @if (old('courseID',$data['courseID'] == $info->id))
+                                <option value="{{ $info->id }}" @if (old('courseID', $data['courseID']) == $info->id)
                                     selected
                                 @endif>{{$info->name}}</option>
                             @endforeach                            
@@ -124,7 +124,7 @@
                     <i class="fas fa-save ml-1"></i>
                     تعديل الدورة
                 </button>
-                <a href="{{ route('courses.index') }}" class="btn btn-secondary">
+                <a href="{{ route('trainings.index') }}" class="btn btn-secondary">
                     <i class="fas fa-times ml-1"></i>
                     إلغاء
                 </a>
