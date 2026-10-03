@@ -24,3 +24,4 @@ Route::get('/add_student/{id}',[TrainingController::class,'add_student'])->name(
 Route::post('/store_student/{id}',[TrainingController::class,'store_student'])->name('trainings.store_student');
 Route::get('/students_list/{id}',[TrainingController::class,'students_list'])->name('trainings.students_list');
 Route::delete('/trainings/{id}/remove_student/{student_id}', [TrainingController::class, 'remove_student'])->name('trainings.remove_student');
+Route::post('/ajax_search_student',[StudentController::class,'ajax_search_student'])->name('students.ajax_search_student');
