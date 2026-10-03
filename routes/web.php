@@ -22,3 +22,5 @@ Route::get('/details/{id}',[TrainingController::class,'details'])->name('trainin
 
 Route::get('/add_student/{id}',[TrainingController::class,'add_student'])->name('trainings.add_student');
 Route::post('/store_student/{id}',[TrainingController::class,'store_student'])->name('trainings.store_student');
+Route::get('/students_list/{id}',[TrainingController::class,'students_list'])->name('trainings.students_list');
+Route::delete('/trainings/{id}/remove_student/{student_id}', [TrainingController::class, 'remove_student'])->name('trainings.remove_student');
