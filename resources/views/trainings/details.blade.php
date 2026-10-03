@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    تفاصيل الدورة
+  اضافة طالب 
 @endsection
 
 @section('content')
@@ -36,9 +36,15 @@
             }, 4000); // 4000ms = 4 ثوانٍ
         </script>
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">تفاصيل الدورة</h3>
+        <div class="card-header">
+                <h3 class="card-title" style="text-align: center; float: none;">بيانات الكورسات</h3>
+                <div class="card-tools">
+                    <a href="{{ route('trainings.add_student', $data['id']) }}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus"></i>  اضافة طالب للدورة
+                    </a>
+                </div>
             </div>
+            
 
             <!-- ✅ إضافة enctype للرفع -->
             <form role="form" method="POST" action="{{ route('trainings.details', $data['id']) }}"

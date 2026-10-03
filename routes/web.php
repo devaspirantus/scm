@@ -19,3 +19,6 @@ Route::resource('students',StudentController::class)->except(['show']);
 Route::resource('flights',ResFlightController::class);
 Route::resource('countries',CountriesController::class);
 Route::get('/details/{id}',[TrainingController::class,'details'])->name('trainings.details');
+
+Route::get('/add_student/{id}',[TrainingController::class,'add_student'])->name('trainings.add_student');
+Route::post('/add_student/{id}',[TrainingController::class,'store_student'])->name('trainings.store_student');
