@@ -6,7 +6,9 @@ use App\Http\Requests\TrainingRequest;
 use App\Models\Country;
 use App\Models\Course;
 use App\Models\Entrolment;
+use App\Models\Student;
 use App\Models\Training;
+use Illuminate\Http\Request;
 
 class TrainingController extends Controller
 {
@@ -78,52 +80,54 @@ class TrainingController extends Controller
 
         $training['course_name'] = Course::where('id', '=', $training->courseID)->value('name');
 
-         $training['studentCounter'] = \App\Models\Entrolment::where('courseID', '=', $training->courseID)->count();
+        $training['studentCounter'] = Entrolment::where('courseID', '=', $training->courseID)->count();
 
         return view('trainings.details', ['data' => $training, 'course' => $course]);
     }
 
     public function add_student($id)
-        {
+    {
         $training = Training::findOrFail($id);
         $course = Course::findOrFail($training->courseID);
-        $students = \App\Models\Student::select('id', 'name')->where('active', 1)->get();
+        $students = Student::select('id', 'name')->where('active', 1)->get();
 
-        if(empty($training)){
+        if (empty($training)) {
             return redirect()->route('trainings.index')->with(['error' => 'الدورة غير موجودة']);
         }
-            return view('trainings.add_student', ['data' => $training, 'course' => $course, 'students' => $students]);
+
+        return view('trainings.add_student', ['data' => $training, 'course' => $course, 'students' => $students]);
+    }
+
+    public function store_student($id, Request $request)
+    {
+        $training = Training::findOrFail($id);
+        $course = Course::findOrFail($training->courseID);
+
+        if (empty($training)) {
+            return redirect()->route('trainings.index')->with(['error' => 'الدورة غير موجودة']);
         }
 
-        public function store_student($id, \Illuminate\Http\Request $request)
-        {
-            $training = Training::findOrFail($id);
-            $course = Course::findOrFail($training->courseID);
+        $validated = $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'enrolements_date' => 'required|date',
+        ]);
 
-            if(empty($training)){
-                return redirect()->route('trainings.index')->with(['error' => 'الدورة غير موجودة']);
-            }
+        // Check if the student is already enrolled in the course
+        $existingEnrollment = Entrolment::where('courseID', $training->courseID)
+            ->where('studentID', $validated['student_id'])
+            ->first();
 
-            $request->validate([
-                'student_id' => 'required|exists:students,id',
-            ]);
-
-            // Check if the student is already enrolled in the course
-            $existingEnrollment = Entrolment::where('courseID', $training->courseID)
-                ->where('studentID', $request->student_id)
-                ->first();
-
-            if ($existingEnrollment) {
-                return redirect()->route('trainings.details', $id)->with(['error' => 'الطالب مسجل بالفعل في هذه الدورة']);
-            }
-
-            // Create a new enrollment
-            $enrollment = new Entrolment();
-            $enrollment->courseID = $training->courseID;
-            $enrollment->studentID = $request->student_id;
-            $enrollment->save();
-
-            return redirect()->route('trainings.details', $id)->with(['success' => 'تم إضافة الطالب بنجاح']);
+        if ($existingEnrollment) {
+            return redirect()->route('trainings.details', $id)->with(['error' => 'الطالب مسجل بالفعل في هذه الدورة']);
         }
-    
+
+        // Create a new enrollment
+        $enrollment = new Entrolment;
+        $enrollment->courseID = $training->courseID;
+        $enrollment->studentID = $validated['student_id'];
+        $enrollment->enrolements_date = $validated['enrolements_date'];
+        $enrollment->save();
+
+        return redirect()->route('trainings.details', $id)->with(['success' => 'تم إضافة الطالب بنجاح']);
+    }
 }

@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Country;
 use App\Models\Course;
+use App\Models\Student;
 use App\Models\Training;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -81,6 +84,42 @@ class TrainingControllerTest extends TestCase
         $response->assertRedirect(route('trainings.index'))
             ->assertSessionHas('success', 'تم حذف بيانات الدورة بنجاح');
         $this->assertDatabaseMissing('trainings', ['id' => $training->id]);
+    }
+
+    public function test_adding_a_student_to_a_training_saves_the_enrollment(): void
+    {
+        $country = Country::create(['name' => 'Country', 'active' => 1]);
+        $course = Course::create(['name' => 'Course', 'active' => 1]);
+        $training = Training::create([
+            'courseID' => $course->id,
+            'start_date' => '2026-10-01',
+            'end_date' => '2026-10-10',
+            'price' => 100,
+        ]);
+        $student = Student::create([
+            'name' => 'Student',
+            'phone' => '123456789',
+            'address' => 'Address',
+            'image' => 'student.jpg',
+            'nationalID' => '1234567890',
+            'notes' => '',
+            'active' => 1,
+            'country_id' => $country->id,
+        ]);
+
+        $response = $this->withoutMiddleware(PreventRequestForgery::class)
+            ->post(route('trainings.store_student', $training), [
+                'student_id' => $student->id,
+                'enrolements_date' => '2026-10-03',
+            ]);
+
+        $response->assertRedirect(route('trainings.details', $training))
+            ->assertSessionHas('success', 'تم إضافة الطالب بنجاح');
+        $this->assertDatabaseHas('enrolements', [
+            'studentID' => $student->id,
+            'courseID' => $course->id,
+            'enrolements_date' => '2026-10-03',
+        ]);
     }
 
     public function test_edit_update_and_destroy_return_not_found_for_a_missing_training(): void

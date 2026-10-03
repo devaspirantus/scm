@@ -35,82 +35,19 @@
             
                     {{-- حقل رقم الهوية --}}
                     <div class="form-group">
-                        <label for="nationalID">رقم الهوية <span class="text-danger">*</span></label>
-                        <input type="text" name="nationalID" id="nationalID" class="form-control @error('nationalID') is-invalid @enderror"
-                               value="{{ old('nationalID') }}" placeholder="أدخل رقم هوية الطالب">
-                        @error('nationalID')
+                        <label for="enrolements_date">تاريخ تسجيله بالدورة  <span class="text-danger">*</span></label>
+                        <input type="date" name="enrolements_date" id="enrolements_date" class="form-control @error('enrolements_date') is-invalid @enderror"
+                               value="{{ old('enrolements_date')  ?? date('Y-m-d') }}" placeholder="أدخل تاريخ تسجيل الطالب">
+                        @error('enrolements_date')
                             <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    {{-- حقل العنوان --}}
-                    <div class="form-group">
-                        <label for="address">العنوان</label>
-                        <input type="text" name="address" id="address" class="form-control @error('address') is-invalid @enderror"
-                               value="{{ old('address') }}" placeholder="أدخل عنوان الطالب">
-                        @error('address')
-                            <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    {{-- حقل معلومات التواصل --}}
-                    <div class="form-group">
-                        <label for="phone">معلومات التواصل (هاتف/بريد)</label>
-                        <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror"
-                               value="{{ old('phone') }}" placeholder="أدخل رقم الهاتف">
-                        @error('phone') {{-- ✅ تم التصحيح هنا --}}
-                            <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    {{-- حقل رفع الصورة --}}
-                    <div class="form-group">
-                        <label for="photo">صورة الطالب</label> {{-- ✅ تم التصحيح هنا --}}
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" name="photo" class="custom-file-input @error('photo') is-invalid @enderror"
-                                       id="photo" accept="image/*" onchange="previewImage(this)">
-                                <label class="custom-file-label" for="photo" id="photoLabel">اختر ملف صورة</label>
-                            </div>
-                        </div>
-                        @error('photo') {{-- ✅ تم التصحيح هنا --}}
-                            <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
-                        @enderror
-                        
-                        {{-- ✅ ميزة إضافية: معاينة الصورة فوراً --}}
-                        <div id="imagePreviewContainer" class="mt-2" style="display: none;">
-                            <img id="imagePreview" src="#" alt="معاينة الصورة" 
-                                 style="max-width: 150px; max-height: 150px; border-radius: 8px; border: 2px solid #ddd; object-fit: cover;">
-                        </div>
-                        
-                        <small class="form-text text-muted mt-1">
-                            <i class="fas fa-info-circle"></i> الصيغ المسموحة: JPG, PNG, GIF (الحد الأقصى: 2MB)
-                        </small>
-                    </div>
-
-                    {{-- حقل الملاحظات --}}
-                    <div class="form-group">
-                        <label for="notes">ملاحظات</label>
-                        <textarea name="notes" id="notes" class="form-control @error('notes') is-invalid @enderror"
-                                  rows="3" placeholder="أي ملاحظات إضافية...">{{ old('notes') }}</textarea>
-                        @error('notes')
-                            <span class="invalid-feedback" style="display: block;">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    {{-- حقل حالة التفعيل --}}
-                    <div class="form-group">
-                        <label for="active">حالة التفعيل</label>
-                        <select name="active" id="active" class="form-control">
-                            <option value="1" {{ old('active', 1) == '1' ? 'selected' : '' }}>مفعل</option>
-                            <option value="0" {{ old('active') == '0' ? 'selected' : '' }}>معطل</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div class="card-footer text-center">
                     <button type="submit" class="btn btn-success">
-                        <i class="fas fa-save ml-1"></i> حفظ الطالب
+                        <i class="fas fa-save ml-1"></i> اضف الطالب
                     </button>
                     <a href="{{ route('students.index') }}" class="btn btn-secondary">
                         <i class="fas fa-times ml-1"></i> إلغاء

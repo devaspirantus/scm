@@ -19,6 +19,17 @@
                 </button>
             </div>
         @endif
+        @if (Session::has('success'))
+            <div class="alert alert-success alert-dismissible fade show position-fixed auto-hide-alert" id="successAlert"
+                style="top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; min-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
+                role="alert">
+                <i class="fas fa-check-circle ml-2"></i>
+                <strong>تم بنجاح!</strong> {{ Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         {{-- ✅ JavaScript للإخفاء التلقائي --}}
         <script>
             // إخفاء تلقائي بعد 4 ثوانٍ لكل الإشعارات
