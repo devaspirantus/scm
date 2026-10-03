@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentRequest;
 use App\Models\Country;
 use App\Models\Student;
-use Illuminate\Http\Request;
-use App\Http\Requests\StudentRequest;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -92,7 +92,7 @@ class StudentController extends Controller
         if ($request->hasFile('photo')) {
             // حذف الصورة القديمة إن وجدت
             if ($student->photo) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($student->photo);
+                Storage::disk('public')->delete($student->photo);
             }
             $validatedData['photo'] = $request->file('photo')->store('students', 'public');
         }

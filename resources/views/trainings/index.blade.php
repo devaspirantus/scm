@@ -95,6 +95,10 @@
                                             title="تعديل">
                                             <i class="fas fa-edit"></i>
                                         </a>
+                                             <a href="{{ route('trainings.details', $info->id) }}" class="btn btn-sm btn-warning"
+                                            title="تفاصيل الدورة">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
 
                                         {{-- ✅ تم تصحيح المسار والنص إلى students.destroy وحذف الطالب --}}
                                         <form action="{{ route('trainings.destroy', $info->id) }}" method="POST"

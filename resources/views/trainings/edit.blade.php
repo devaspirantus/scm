@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('title')
-    إضافة كورس
+    تعديل كورس
 @endsection
 
 @section('content')

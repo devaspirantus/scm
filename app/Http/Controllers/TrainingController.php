@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TrainingRequest;
 use App\Models\Country;
 use App\Models\Course;
+use App\Models\Entrolment;
 use App\Models\Training;
 
 class TrainingController extends Controller
@@ -68,5 +69,17 @@ class TrainingController extends Controller
         $training->delete();
 
         return redirect()->route('trainings.index')->with(['success' => 'تم حذف بيانات الدورة بنجاح']);
+    }
+
+    public function details(int $id)
+    {
+        $training = Training::findOrFail($id);
+        $course = Course::findOrFail($training->courseID);
+
+        $training['course_name'] = Course::where('id', '=', $training->courseID)->value('name');
+
+         $training['studentCounter'] = \App\Models\Entrolment::where('courseID', '=', $training->courseID)->count();
+
+        return view('trainings.details', ['data' => $training, 'course' => $course]);
     }
 }

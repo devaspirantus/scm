@@ -18,3 +18,4 @@ Route::resource('courses',CoursesController::class)->except(['show']);
 Route::resource('students',StudentController::class)->except(['show']);
 Route::resource('flights',ResFlightController::class);
 Route::resource('countries',CountriesController::class);
+Route::get('/details/{id}',[TrainingController::class,'details'])->name('trainings.details');
