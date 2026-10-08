@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentRequest;
 use App\Models\Country;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\General;
+use App\Notifications\CreateStudent;
+use Illuminate\Support\Facades\Notification;
 
 class StudentController extends Controller
 {
@@ -51,6 +54,10 @@ class StudentController extends Controller
             $validatedData['photo'] = $request->file('photo')->store('students', 'public');
         }
         Student::create($validatedData);
+
+        $users = User::select('id')->get();
+        $content = "تم اضافة الطالب الجديد: " . $request->name;
+        Notification::send($users, new CreateStudent($request->name, $content));
 
         return redirect()->route('students.index')->with(['success' => 'تم اضافة الطالب بنجاح'])->withInput();
     }
