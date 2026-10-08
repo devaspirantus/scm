@@ -7,11 +7,14 @@ use App\Models\Country;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\General;
 
 class StudentController extends Controller
 {
+    use General;
     public function index()
     {
+        $d = $this->developer();
         $student = Student::with('country')->get();
 
         // if(!empty($student))
@@ -20,7 +23,7 @@ class StudentController extends Controller
         //             $info->countries::where('id','=',$info->country_id)->value('name'); // collection from country table
         //         }
         //     }
-        return view('students.index', ['student' => $student]);
+        return  view('students.index', ['student' => $student, 'trait' => $d]);
     }
 
     public function create()
@@ -38,25 +41,7 @@ class StudentController extends Controller
         if ($exists > 0) {
             return redirect()->back()->with(['error' => 'الطالب مسجل مسبقا']);
         }
-        // $student = new Student();
 
-        // $student->name = $request->name;
-        // $student->country_id = $request->country_id;
-        // $student->phone = $request->phone;
-        // $student->nationalID = $request->nationalID;
-        // $student->address = $request->address;
-        // $student->notes = $request->notes;
-        // $student->active = $request->active;
-
-        // if($request->has('photo'))
-        //     {
-        //         $image = $request->photo;
-        //         $extension = strtolower($image->extension());
-        //         $filename = time().rand(1,1000).".".$extension;
-        //         $image->move('uploads',$filename);
-        //         $student->image = $filename;
-        //     }
-        // $student->save();
 
         // ✅ 3. جلب البيانات التي تم التحقق منها بنجاح (مضمونة 100%)
         $validatedData = $request->validated();
@@ -126,4 +111,6 @@ class StudentController extends Controller
 
         return view('students.ajax_search_student', ['student' => $students]);
     }
+
+
 }

@@ -258,8 +258,8 @@ All plugins options are covered in demos.
 
 ***
 
-#### Support Ion-series plugins development:
 
-* [Support the plugin on Patreon](https://www.patreon.com/IonDen)
-
-* Donate direct to my Paypal account: https://www.paypal.me/IonDen
+### Adding Helpers into Laravel 
+* Create a new folder that have a name [Helpers] -> create the file [General.php]
+* Go to composer.json file then add after autoload the 'files' tag same as the project
+* Type in the command [composer dump-autoload]

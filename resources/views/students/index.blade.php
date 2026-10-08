@@ -11,6 +11,7 @@
                 <h3 class="card-title" style="text-align: center; float: none;">بيانات الطلاب</h3>
                 <div class="card-tools">
                     {{-- ✅ تم تصحيح المسار إلى students.create --}}
+                   <h3>{{ $trait }}</h3>
                     <a href="{{ route('students.create') }}" class="btn btn-primary btn-sm">
                         <i class="fas fa-plus"></i> إضافة طالب جديد
                     </a>
