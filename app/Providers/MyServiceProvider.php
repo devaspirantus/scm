@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\HelperService;
 use Illuminate\Support\ServiceProvider;
 
 class MyServiceProvider extends ServiceProvider
@@ -11,8 +12,14 @@ class MyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('helper',function(){
-            return new \App\Services\HelperService();
+        // Register the HelperService in the service container
+        // $this->app->bind('helper',function(){
+        //     return new \App\Services\HelperService();
+        // });
+
+        // Register the HelperService by singleton
+        $this->app->singleton(HelperService::class, function () {
+            return new HelperService();
         });
     }
 
