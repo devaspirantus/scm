@@ -7,6 +7,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\WelcomeController;
 
 Route::get('/', function () {
     return view('admin.home');
@@ -25,3 +26,5 @@ Route::post('/store_student/{id}',[TrainingController::class,'store_student'])->
 Route::get('/students_list/{id}',[TrainingController::class,'students_list'])->name('trainings.students_list');
 Route::delete('/trainings/{id}/remove_student/{student_id}', [TrainingController::class, 'remove_student'])->name('trainings.remove_student');
 Route::post('/ajax_search_student',[StudentController::class,'ajax_search_student'])->name('students.ajax_search_student');
+
+Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
